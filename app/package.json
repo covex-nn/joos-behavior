@@ -1,0 +1,23 @@
+{
+  "name" : "joos-behavior-hello-world",
+  "main" : "app.js",
+  "version" : "2.0.0",
+  "author" : {
+    "name" : "Andrey F. Mindubaev",
+    "email" : "andrey@mindubaev.ru"
+  },
+  "description" : "JooS behavior components",
+  "license" : "Apache-2.0",
+  "keywords" : [ "nativescript", "joos", "components" ],
+  "repository" : {
+    "type" :"git",
+    "url" : "git://github.com/NativeScript/template-hello-world.git"
+  },
+  "bugs" : {
+    "url" : "https://github.com/NativeScript/template-hello-world/issues"
+  },
+  "homepage" : "https://github.com/NativeScript/template-hello-world",
+  "android" : {
+    "v8Flags" : "--expose_gc"
+  }
+}

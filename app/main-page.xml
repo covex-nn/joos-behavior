@@ -1,0 +1,27 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="onLoaded">
+    <GridLayout columns="auto, auto, auto, auto" rows="auto, auto, auto" width="100%" id="container">
+        <StackLayout col="0" row="0">
+            <Button text="+class 'b1'" class="show-debug" ontap="{{ attachB1_className }}" />
+            <Button text="+class 'b2'" class="show-debug" ontap="{{ attachB2_className }}" />
+            <Button text="-class" class="show-debug" ontap="{{ detach_className }}" />
+        </StackLayout>
+
+        <StackLayout col="1" row="0">
+            <Button text="+style 'b1'" class="show-debug" ontap="{{ attachB1_style }}" />
+            <Button text="+style 'b2'" class="show-debug" ontap="{{ attachB2_style }}" />
+            <Button text="-style" class="show-debug" ontap="{{ detach_style }}" />
+        </StackLayout>
+
+        <GridLayout columns="50%, 50%" rows="auto, auto, auto, auto" col="0" row="2" colSpan="4">
+            <Label text="Label properties" col="0" row="0" colSpan="2"/>
+
+            <Label col="0" row="1" text="className" />
+            <Label col="1" row="1" text="{{ info0 }}" />
+
+            <Label col="0" row="2" text="Behavior name" />
+            <Label col="1" row="0" text="{{ info1 }}" />
+        </GridLayout>
+
+        <Label class="title b1" text="Tap me!" id="component" col="0" row="1" colSpan="4" />
+    </GridLayout>
+</Page>

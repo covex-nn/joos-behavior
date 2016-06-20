@@ -1,0 +1,17 @@
+﻿.title {
+    font-size: 30;
+    horizontal-align: center;
+    margin: 20;
+}
+Button.show-debug {
+    font-size: 10;
+    height: 35;
+}
+
+.b1 {
+    joos-behavior: "~/shared/b1";
+}
+
+.b2 {
+    joos-behavior: "~/shared/b2";
+}
