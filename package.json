@@ -1,4 +1,6 @@
 {
+  "name": "nativescript-behavior",
+  "version" : "0.0.1",
   "description": "NativeScript Behavior",
   "license": "MIT",
   "files": [
