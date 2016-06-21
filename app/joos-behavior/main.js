@@ -202,7 +202,7 @@ style.joosBehaviorProperty = new styleProperty.Property(
             return data;
         },
         /**
-         * Validate value
+         * Validate module
          *
          * @param {String} value Value
          *
@@ -216,8 +216,7 @@ style.joosBehaviorProperty = new styleProperty.Property(
                 } else {
                     value = Behavior.convertCssValue(value);
                     var module = require(value);
-
-                    result = !!module["Behavior"]; // && module.Behavior instanceof Behavior;
+                    result = !!module["Behavior"] && module.Behavior.prototype instanceof Behavior;
                 }
             } catch (e) {
                 result = false;
