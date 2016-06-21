@@ -32,17 +32,17 @@ function onLoaded(args) {
     bindingContext = new Observable();
 
     bindingContext.attachB1_className = function() {
-        label.className = "title b1";
+        label.className = "tap-me b1";
         collectInfo();
     };
 
     bindingContext.attachB2_className = function() {
-        label.className = "title b2";
+        label.className = "tap-me b2";
         collectInfo();
     };
 
     bindingContext.detach_className = function() {
-        label.className = "title";
+        label.className = "tap-me";
         collectInfo();
     };
 

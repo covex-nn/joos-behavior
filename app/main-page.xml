@@ -12,16 +12,16 @@
             <Button text="-style" class="show-debug" ontap="{{ detach_style }}" />
         </StackLayout>
 
-        <GridLayout columns="50%, 50%" rows="auto, auto, auto, auto" col="0" row="2" colSpan="4">
-            <Label text="Label properties" col="0" row="0" colSpan="2"/>
+        <GridLayout columns="*, *" rows="auto, auto, auto, auto" col="0" row="2" colSpan="4" class="debug-table">
+            <Label text="Tap-me debug info" col="0" row="0" colSpan="2" class="debug-cell cell-header" />
 
-            <Label col="0" row="1" text="className" />
-            <Label col="1" row="1" text="{{ info0 }}" />
+            <Label col="0" row="1" text="className" class="debug-cell cell-title" />
+            <Label col="1" row="1" text="{{ info0 }}" class="debug-cell cell-data" />
 
-            <Label col="0" row="2" text="Behavior name" />
-            <Label col="1" row="0" text="{{ info1 }}" />
+            <Label col="0" row="2" text="behavior name" class="debug-cell cell-title" />
+            <Label col="1" row="2" text="{{ info1 }}" class="debug-cell cell-data" />
         </GridLayout>
 
-        <Label class="title b1" text="Tap me!" id="component" col="0" row="1" colSpan="4" />
+        <Button class="tap-me b1" text="Tap me!" id="component" col="0" row="1" colSpan="4" />
     </GridLayout>
 </Page>

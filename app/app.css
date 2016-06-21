@@ -1,4 +1,4 @@
-﻿.title {
+﻿.tap-me {
     font-size: 30;
     horizontal-align: center;
     margin: 20;
@@ -15,3 +15,10 @@ Button.show-debug {
 .b2 {
     joos-behavior: "~/shared/b2";
 }
+
+.debug-table { padding: 10; }
+
+.debug-table .debug-cell { margin: 5px; }
+.debug-table .cell-header { font-size: 24; }
+.debug-table .cell-title { font-size: 16; font-weight: bold; }
+.debug-table .cell-data { font-size: 16; }
