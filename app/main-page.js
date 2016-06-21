@@ -1,8 +1,9 @@
 var Behavior = require("~/joos-behavior");
 var Observable = require("data/observable").Observable;
 var Label = require("ui/label").Label;
+var View = require("ui/core/view").View;
 
-/** @type {Label} */
+/** @type {Label|View} */
 var label;
 /** @type {Observable} */
 var bindingContext;
@@ -13,7 +14,7 @@ function setInfo(num, value) {
 
 function collectInfo() {
     /** @type {b0|b1|b2} */
-    var component = Behavior.publicMorozov("behaviorById", label.behaviorId);
+    var component = label.getBehavior();
 
     setInfo("info0", label.className);
     if (component) {

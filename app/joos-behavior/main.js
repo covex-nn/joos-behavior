@@ -286,23 +286,20 @@ Object.defineProperty(
     configurable: true
 });
 
+/**
+ * Get view's behavior if attached
+ * 
+ * @return {Behavior}
+ */
 View.prototype.getBehavior = function() {
-    // @todo ??
-    // А нужно ли знать какой Behavior у элемента?
-    // Или может использовать это в attachBehavior ??
-};
-
-exports.Behavior = Behavior;
-
-exports.publicMorozov = function(name, value) {
+    /** @type {Behavior} */
     var result;
-    switch (name) {
-        case "behaviorById":
-            result = behaviorList[value] || null;
-
-            break;
-        default:
-            result = "-";
+    if (this.behaviorId) {
+        result = behaviorList[this.behaviorId];
+    } else {
+        result = null;
     }
     return result;
 };
+
+exports.Behavior = Behavior;

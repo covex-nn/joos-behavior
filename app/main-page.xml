@@ -15,7 +15,7 @@
         <GridLayout columns="*, *" rows="auto, auto, auto, auto" col="0" row="2" colSpan="4" class="debug-table">
             <Label text="Tap-me debug info" col="0" row="0" colSpan="2" class="debug-cell cell-header" />
 
-            <Label col="0" row="1" text="className" class="debug-cell cell-title" />
+            <Label col="0" row="1" text="view class name" class="debug-cell cell-title" />
             <Label col="1" row="1" text="{{ info0 }}" class="debug-cell cell-data" />
 
             <Label col="0" row="2" text="behavior name" class="debug-cell cell-title" />
