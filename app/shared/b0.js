@@ -1,5 +1,5 @@
 var JooS = require("joos-inheritance");
-var Behavior = require("../joos-behavior").Behavior;
+var Behavior = require("~/joos-behavior").Behavior;
 var dialogs = require("ui/dialogs");
 
 /**

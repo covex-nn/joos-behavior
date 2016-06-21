@@ -1,5 +1,5 @@
 var application = require("application");
 
-require("./joos-behavior");
+require("../joos-behavior");
 
 application.start({ moduleName: "main-page" });
