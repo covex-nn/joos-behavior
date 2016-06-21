@@ -2,6 +2,7 @@ var Behavior = require("~/joos-behavior");
 var Observable = require("data/observable").Observable;
 var Label = require("ui/label").Label;
 var View = require("ui/core/view").View;
+var dialogs = require("ui/dialogs");
 
 /** @type {Label|View} */
 var label;
@@ -27,6 +28,7 @@ function collectInfo() {
 function onLoaded(args) {
     /** @type {Page|ContentView|View} */
     var page = args.object;
+    var layout = page.getViewById("container");
 
     label = page.getViewById("component");
 
@@ -60,6 +62,24 @@ function onLoaded(args) {
     bindingContext.detach_style = function() {
         label.style.joosBehavior = undefined;
         collectInfo();
+    };
+
+    bindingContext.child_add = function() {
+        if (!label.isLoaded) {
+            layout.addChild(label);
+            collectInfo();
+        } else {
+            dialogs.alert("Tap-me was already added");
+        }
+    };
+
+    bindingContext.child_remove = function() {
+        if (label.isLoaded) {
+            layout.removeChild(label);
+            collectInfo();
+        } else {
+            dialogs.alert("Tap-me was already removed");
+        }
     };
 
     collectInfo();

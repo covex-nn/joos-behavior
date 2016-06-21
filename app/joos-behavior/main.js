@@ -55,6 +55,15 @@ Behavior.convertCssValue = function(value) {
 };
 
 /**
+ * console.log behavior data
+ *
+ * @return null
+ */
+function consoleLogBehaviors() {
+    // console.log("Total behaviors: " + behaviorLength);
+}
+
+/**
  * Create behavior by name
  *
  * @param {View}   view View
@@ -87,6 +96,8 @@ function attachBehavior(view, name) {
             view.behaviorId = behaviorCounter;
 
             view.addEventListener("unloaded", viewUnloaded);
+
+            consoleLogBehaviors();
         }
     }
 }
@@ -95,11 +106,10 @@ function attachBehavior(view, name) {
  * Detach behavior
  *
  * @param {View} view View
- * @param {String} name Behavior name
  *
  * @return null
  */
-function detachBehavior(view, name) {
+function detachBehavior(view) {
     var behaviorId = view.behaviorId;
 
     if (behaviorId) {
@@ -113,6 +123,8 @@ function detachBehavior(view, name) {
 
         view.behaviorId = undefined;
         view.removeEventListener("unloaded", viewUnloaded);
+
+        consoleLogBehaviors();
     }
 }
 
@@ -146,9 +158,8 @@ function viewUnloaded(data) {
     var object;
     object = data.object;
 
-    var name = object.style.joosBehavior;
-    if (name) {
-        detachBehavior(object, name);
+    if (object.behaviorId) {
+        detachBehavior(object);
     }
 }
 
@@ -303,3 +314,5 @@ View.prototype.getBehavior = function() {
 };
 
 exports.Behavior = Behavior;
+
+// @todo clean up for page/frame upload??

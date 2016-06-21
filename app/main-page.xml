@@ -12,6 +12,11 @@
             <Button text="-style" class="show-debug" ontap="{{ detach_style }}" />
         </StackLayout>
 
+        <StackLayout col="2" row="0">
+            <Button text="remove" class="show-debug" ontap="{{ child_remove }}" />
+            <Button text="add" class="show-debug" ontap="{{ child_add }}" />
+        </StackLayout>
+
         <GridLayout columns="*, *" rows="auto, auto, auto, auto" col="0" row="2" colSpan="4" class="debug-table">
             <Label text="Tap-me debug info" col="0" row="0" colSpan="2" class="debug-cell cell-header" />
 

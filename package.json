@@ -1,43 +1,43 @@
 {
-  "name": "nativescript-behavior",
-  "version": "0.0.5",
-  "description": "NativeScript Behavior",
-  "license": "MIT",
-  "files": [
-    "app/joos-behavior/main.js"
-  ],
-  "main": "app/joos-behavior/main.js",
-  "keywords": [
-    "nativescript",
-    "components"
-  ],
-  "author": "Andrey F. Mindubaev",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/covex-nn/joos-behavior.git"
+  "name" : "nativescript-behavior",
+  "description" : "NativeScript Behavior",
+  "license" : "MIT",
+  "main" : "app/joos-behavior/main.js",
+  "version" : "0.0.5",
+  "author" : {
+    "name" : "Andrey F. Mindubaev",
+    "email" : "andrey@mindubaev.ru"
   },
-  "nativescript": {
-    "id": "org.nativescript.joosComponent",
-    "tns-android": {
-      "version": "2.0.0"
+  "keywords" : [ "nativescript", "components" ],
+  "files" : [
+    "app/joos-behavior"
+  ],
+  "repository" : {
+    "type" : "git",
+    "url" : "git+https://github.com/covex-nn/joos-behavior.git"
+  },
+  "nativescript" : {
+    "id" : "org.nativescript.joosComponent",
+    "tns-android" : {
+      "version" : "2.0.0"
     }
   },
-  "dependencies": {
-    "joos-inheritance": "^1.0.1"
+  "dependencies" : {
+    "joos-inheritance" : "^1.0.1",
+    "tns-core-modules" : "^2.0.1"
   },
-  "devDependencies": {
-    "tns-core-modules": "^2.0.1",
-    "babel-traverse": "6.9.0",
-    "babel-types": "6.10.2",
-    "babylon": "6.8.1",
-    "filewalker": "0.1.2",
-    "lazy": "1.0.11"
+  "devDependencies" : {
+    "babel-traverse" : "6.9.0",
+    "babel-types" : "6.10.2",
+    "babylon" : "6.8.1",
+    "filewalker" : "0.1.2",
+    "lazy" : "1.0.11"
   },
-  "bugs": {
-    "url": "https://github.com/covex-nn/joos-behavior/issues"
+  "bugs" : {
+    "url" : "https://github.com/covex-nn/joos-behavior/issues"
   },
-  "homepage": "https://github.com/covex-nn/joos-behavior",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "homepage" : "https://github.com/covex-nn/joos-behavior",
+  "scripts" : {
+    "test" : "echo \"Error: no test specified\" && exit 1"
   }
 }
