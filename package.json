@@ -3,7 +3,7 @@
   "description" : "NativeScript Behavior",
   "license" : "MIT",
   "main" : "app/joos-behavior/main.js",
-  "version" : "0.0.5",
+  "version" : "0.0.6",
   "author" : {
     "name" : "Andrey F. Mindubaev",
     "email" : "andrey@mindubaev.ru"

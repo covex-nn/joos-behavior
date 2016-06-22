@@ -35,12 +35,12 @@ function onLoaded(args) {
     bindingContext = new Observable();
 
     bindingContext.attachB1_className = function() {
-        label.className = "tap-me b1";
+        label.className = "tap-me me-b1";
         collectInfo();
     };
 
     bindingContext.attachB2_className = function() {
-        label.className = "tap-me b2";
+        label.className = "tap-me me-b2";
         collectInfo();
     };
 

@@ -11,7 +11,7 @@ var b1 = JooS.Reflect(
     {
         __constructor: function(view) {
             this.__constructor.__parent(view);
-            this.name = "b1";
+            this.name = "~/shared/b1";
         }
     }
 );

@@ -1,4 +1,10 @@
-﻿.tap-me {
+﻿Page {
+    joos-behavior: "~/joos-behavior/page";
+}
+.tap-container {
+    joos-behavior: "~/shared/layout";
+}
+.tap-me {
     font-size: 30;
     horizontal-align: center;
     margin: 20;
@@ -8,11 +14,11 @@ Button.show-debug {
     height: 35;
 }
 
-.b1 {
+.me-b1 {
     joos-behavior: "~/shared/b1";
 }
 
-.b2 {
+.me-b2 {
     joos-behavior: "~/shared/b2";
 }
 

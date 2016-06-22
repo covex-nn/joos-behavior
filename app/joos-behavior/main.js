@@ -1,26 +1,28 @@
 var JooS = require("joos-inheritance");
+var BehaviorEvent = require("./event");
 
 var view = require("ui/core/view");
 var style = require("ui/styling/style");
+var page = require("ui/page");
 var dependencyObservable = require("ui/core/dependency-observable");
 var styleProperty = require("ui/styling/style-property");
 var observable = require("data/observable");
 var proxy = require("ui/core/proxy");
 
-var Style = style.Style;
 var View = view.View;
+var Style = style.Style;
+var Page = page.Page;
 var Observable = observable.Observable;
 
 var behaviorCounter = 0;
-var behaviorLength = 0;
 var behaviorList = { };
 
 /**
  * @class Behavior
- * @extends JooS.Class
+ * @extends Observable
  */
 var Behavior = JooS.Reflect(
-    JooS.Class,
+    Observable,
     /** @lends Behavior.prototype */
     {
         /**
@@ -30,8 +32,18 @@ var Behavior = JooS.Reflect(
          * @constructs Behavior
          */
         __constructor: function(nsObject) {
+            this.__constructor.__parent();
             /** @member {View} */
             this.nsObject = nsObject;
+            /** @member {Boolean} */
+            this.isRegistered = false;
+            /** @member {Behavior} */
+            this.parent = null;
+            /** @member {Behavior[]} */
+            this.children = [ ];
+
+            this.addEventListener(Behavior.loadedChildEvent, this.onLoadedChild, this);
+            this.addEventListener(Behavior.unloadedChildEvent, this.onUnloadedChild, this);
         },
         /**
          * Destructor
@@ -39,11 +51,131 @@ var Behavior = JooS.Reflect(
          * @destructs Behavior
          */
         __destructor: function() {
+            if (this.parent) {
+                var eventData = this.createUnloadedChildEvent().getEventData();
+                this.parent.notify(eventData);
+            }
             this.nsObject = null;
+            this._observers = { };
+        },
+        /**
+         * Get parent class
+         *
+         * @returns {Function}
+         */
+        getParentClass: function() {
+            return Behavior;
+        },
+        /**
+         * Get parent Behavior
+         *
+         * @return {Behavior|null}
+         */
+        getParent: function() {
+            /** @type {View} */
+            var parent = this.nsObject.parent;
+            /** @type {Behavior} */
+            var parentBehavior;
+            /** @type {Function} */
+            var parentClass = this.getParentClass();
+
+            var counter = 128;
+            while (parent && counter) {
+                parentBehavior = parent.getBehavior();
+                if (parentBehavior && parentBehavior instanceof parentClass) {
+                    return parentBehavior;
+                }
+                parent = parent.parent;
+                counter--;
+            }
+
+            return null;
+        },
+        /**
+         * onLoadedChild event handler
+         *
+         * @param {Object} eventData Event data
+         *
+         * @returns {boolean}
+         * @private
+         */
+        onLoadedChild: function(eventData) {
+            if (eventData.object instanceof Behavior) {
+                this.children.push(eventData.object);
+            }
+        },
+        /**
+         * PageBehavior calls this method after initialization
+         *
+         * @return null
+         */
+        onRegistered: function() {
+            this.isRegistered = true;
+
+            this.parent = this.getParent();
+
+            if (this.parent) {
+                var eventData = this.createLoadedChildEvent().getEventData();
+                this.parent.notify(eventData);
+            }
+        },
+        /**
+         * onLoadedChild event handler
+         *
+         * @param {Object} eventData Event data
+         *
+         * @returns {boolean}
+         * @private
+         */
+        onUnloadedChild: function(eventData) {
+            if (eventData.object instanceof Behavior) {
+                var index = this.children.indexOf(eventData.object);
+                if (index >= 0) {
+                    this.children.splice(index, 1);
+                }
+            }
+        },
+        /**
+         * Create loadedChild event
+         *
+         * @returns {BehaviorEvent}
+         * @private
+         */
+        createLoadedChildEvent: function() {
+            return new BehaviorEvent(
+                Behavior.loadedChildEvent,
+                {
+                    object: this
+                }
+            );
+        },
+        /**
+         * Create unloadedChild event
+         *
+         * @returns {BehaviorEvent}
+         * @private
+         */
+        createUnloadedChildEvent: function() {
+            return new BehaviorEvent(
+                Behavior.unloadedChildEvent,
+                {
+                    object: this
+                }
+            );
         }
     }
 );
 
+Behavior.loadedChildEvent = "loadedChild";
+Behavior.unloadedChildEvent = "unloadedChild";
+
+/**
+ * Trim module name and remove " and '
+ *
+ * @param {String} value Module name
+ *
+ * @returns {String}
+ */
 Behavior.convertCssValue = function(value) {
     return value
         .toString()
@@ -53,15 +185,6 @@ Behavior.convertCssValue = function(value) {
         .replace(/^'/, "")
         .replace(/'$/, "");
 };
-
-/**
- * console.log behavior data
- *
- * @return null
- */
-function consoleLogBehaviors() {
-    // console.log("Total behaviors: " + behaviorLength);
-}
 
 /**
  * Create behavior by name
@@ -88,16 +211,15 @@ function createBehavior(view, name) {
 function attachBehavior(view, name) {
     if (view.isLoaded) {
         if (!view.behaviorId) {
-            var newBehavior = createBehavior(view, name);
-
             behaviorCounter++;
-            behaviorLength++;
-            behaviorList[behaviorCounter] = newBehavior;
             view.behaviorId = behaviorCounter;
+            behaviorList[behaviorCounter] = createBehavior(view, name);
+
+            if (view.page) {
+                view.page.registerBehavior(behaviorList[behaviorCounter]);
+            }
 
             view.addEventListener("unloaded", viewUnloaded);
-
-            consoleLogBehaviors();
         }
     }
 }
@@ -111,20 +233,16 @@ function attachBehavior(view, name) {
  */
 function detachBehavior(view) {
     var behaviorId = view.behaviorId;
+    view.removeEventListener("unloaded", viewUnloaded);
 
     if (behaviorId) {
         /** @type {Behavior} */
         var oldBehavior = behaviorList[behaviorId];
         if (oldBehavior) {
-            oldBehavior.destroy();
+            oldBehavior.__destructor();
             delete behaviorList[behaviorId];
-            behaviorLength--;
         }
-
         view.behaviorId = undefined;
-        view.removeEventListener("unloaded", viewUnloaded);
-
-        consoleLogBehaviors();
     }
 }
 
@@ -312,6 +430,51 @@ View.prototype.getBehavior = function() {
     return result;
 };
 
-exports.Behavior = Behavior;
+/**
+ * Register behavior
+ *
+ * @param {Behavior} Behavior Behavior
+ *
+ * @return null
+ */
+Page.prototype.registerBehavior = function(Behavior) {
+    /** @type {Behavior} */
+    var object = this.getBehavior();
+    if (object && object.isRegistered) {
+        Behavior.onRegistered();
+    } else {
+        if (!this["registerQueue"]) {
+            /** @type Behavior[] */
+            this.registerQueue = [ Behavior ];
+        } else {
+            this.registerQueue.push(Behavior);
+        }
 
-// @todo clean up for page/frame upload??
+        if (Behavior.nsObject == this) {
+            /** @type {Behavior} */
+            var item;
+            while (this.registerQueue.length) {
+                item = this.registerQueue.pop();
+                item.onRegistered();
+            }
+        }
+    }
+};
+
+/**
+ * @class PageBehavior
+ * @extends Behavior
+ */
+var PageBehavior = JooS.Reflect(
+    Behavior,
+    /** @lends PageBehavior.prototype */
+    {
+        __constructor: function(nsObject) {
+            this.__constructor.__parent(nsObject);
+        }
+    }
+);
+
+exports.Behavior = Behavior;
+exports.BehaviorEvent = BehaviorEvent;
+exports.PageBehavior = PageBehavior;
