@@ -1,48 +1,56 @@
 {
-  "name" : "nativescript-behavior",
-  "description" : "NativeScript Behavior",
-  "license" : "MIT",
-  "main" : "lib/main.js",
-  "version" : "0.0.10",
-  "author" : {
-    "name" : "Andrey F. Mindubaev",
-    "email" : "andrey@mindubaev.ru"
+  "name": "nativescript-behavior",
+  "description": "NativeScript Behavior",
+  "license": "MIT",
+  "main": "lib/main.js",
+  "version": "0.0.10",
+  "author": {
+    "name": "Andrey F. Mindubaev",
+    "email": "andrey@mindubaev.ru"
   },
-  "keywords" : [ "nativescript", "components" ],
-  "files" : [
+  "keywords": [
+    "nativescript",
+    "components"
+  ],
+  "files": [
     "lib"
   ],
-  "repository" : {
-    "type" : "git",
-    "url" : "git+https://github.com/covex-nn/joos-behavior.git"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/covex-nn/joos-behavior.git"
   },
-  "nativescript" : {
-    "id" : "org.nativescript.joosComponent",
-    "tns-android" : {
-      "version" : "2.0.0"
+  "nativescript": {
+    "id": "org.nativescript.joosComponent",
+    "tns-android": {
+      "version": "2.0.0"
     }
   },
-  "dependencies" : {
-    "joos-inheritance" : "^1.0.1",
-    "tns-core-modules" : "^2.0.1"
+  "dependencies": {
+    "joos-inheritance": "^1.0.1",
+    "nativescript-unit-test-runner": "^0.3.3",
+    "tns-core-modules": "^2.0.1"
   },
-  "devDependencies" : {
-    "babel-traverse" : "6.9.0",
-    "babel-types" : "6.10.2",
-    "babylon" : "6.8.1",
-    "filewalker" : "0.1.2",
-    "lazy" : "1.0.11",
-    "grunt" : "^1.0.1",
-    "grunt-cli" : "^1.2.0",
-    "grunt-npmcopy" : "^0.1.0",
-    "grunt-contrib-clean" : "^1.0.0"
+  "devDependencies": {
+    "babel-traverse": "6.9.0",
+    "babel-types": "6.10.2",
+    "babylon": "6.8.1",
+    "filewalker": "0.1.2",
+    "grunt": "^1.0.1",
+    "grunt-cli": "^1.2.0",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-npmcopy": "^0.1.0",
+    "karma": "^1.0.0",
+    "karma-nativescript-launcher": "^0.4.0",
+    "karma-qunit": "^1.0.0",
+    "lazy": "1.0.11",
+    "qunitjs": "^1.23.1"
   },
-  "bugs" : {
-    "url" : "https://github.com/covex-nn/joos-behavior/issues"
+  "bugs": {
+    "url": "https://github.com/covex-nn/joos-behavior/issues"
   },
-  "homepage" : "https://github.com/covex-nn/joos-behavior",
-  "scripts" : {
-    "test" : "echo \"Error: no test specified\" && exit 1",
-    "prepublish" : "node_modules/.bin/grunt"
+  "homepage": "https://github.com/covex-nn/joos-behavior",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublish": "node_modules/.bin/grunt"
   }
 }
