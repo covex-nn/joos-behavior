@@ -12,6 +12,13 @@ var b1 = JooS.Reflect(
         __constructor: function(view) {
             this.__constructor.__parent(view);
             this.name = "~/shared/b1";
+
+            this.nsObject.addEventListener("tap", this.onTap, this);
+        },
+        __destructor: function() {
+            this.nsObject.removeEventListener("tap", this.onTap, this);
+
+            this.__destructor.__parent();
         }
     }
 );

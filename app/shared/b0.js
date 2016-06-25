@@ -19,10 +19,11 @@ var b0 = JooS.Reflect(
             this.__constructor.__parent(view);
 
             this.name = "~/shared/b0";
-            this.nsObject.addEventListener("tap", this.onTap, this);
+
+            //this.nsObject.addEventListener("tap", this.onTap, this);
         },
         __destructor: function() {
-            this.nsObject.removeEventListener("tap", this.onTap, this);
+            //this.nsObject.removeEventListener("tap", this.onTap, this);
             
             this.__destructor.__parent();
         },

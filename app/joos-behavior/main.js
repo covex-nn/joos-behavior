@@ -56,7 +56,6 @@ var Behavior = JooS.Reflect(
                 this.parent.notify(eventData);
             }
             this.nsObject = null;
-            this._observers = { };
         },
         /**
          * Get parent class
@@ -70,6 +69,7 @@ var Behavior = JooS.Reflect(
          * Get parent Behavior
          *
          * @return {Behavior|null}
+         * @private
          */
         getParent: function() {
             /** @type {View} */
@@ -219,7 +219,7 @@ function attachBehavior(view, name) {
                 view.page.registerBehavior(behaviorList[behaviorCounter]);
             }
 
-            view.addEventListener("unloaded", viewUnloaded);
+            view.addEventListener(View.unloadedEvent, viewUnloaded);
         }
     }
 }
@@ -233,7 +233,7 @@ function attachBehavior(view, name) {
  */
 function detachBehavior(view) {
     var behaviorId = view.behaviorId;
-    view.removeEventListener("unloaded", viewUnloaded);
+    view.removeEventListener(View.unloadedEvent, viewUnloaded);
 
     if (behaviorId) {
         /** @type {Behavior} */
@@ -307,14 +307,14 @@ style.joosBehaviorProperty = new styleProperty.Property(
             if (oldValue) {
                 detachBehavior(viewObject, oldValue);
             } else {
-                viewObject.addEventListener("loaded", viewLoaded);
+                viewObject.addEventListener(View.loadedEvent, viewLoaded);
             }
 
             var newValue = data.newValue;
             if (newValue) {
                 attachBehavior(viewObject, newValue);
             } else {
-                viewObject.removeEventListener("loaded", viewLoaded);
+                viewObject.removeEventListener(View.loadedEvent, viewLoaded);
             }
 
             return data;
