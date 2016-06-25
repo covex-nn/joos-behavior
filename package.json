@@ -2,15 +2,15 @@
   "name" : "nativescript-behavior",
   "description" : "NativeScript Behavior",
   "license" : "MIT",
-  "main" : "app/joos-behavior/main.js",
-  "version" : "0.0.6",
+  "main" : "lib/main.js",
+  "version" : "0.0.10",
   "author" : {
     "name" : "Andrey F. Mindubaev",
     "email" : "andrey@mindubaev.ru"
   },
   "keywords" : [ "nativescript", "components" ],
   "files" : [
-    "app/joos-behavior"
+    "lib"
   ],
   "repository" : {
     "type" : "git",
@@ -31,13 +31,18 @@
     "babel-types" : "6.10.2",
     "babylon" : "6.8.1",
     "filewalker" : "0.1.2",
-    "lazy" : "1.0.11"
+    "lazy" : "1.0.11",
+    "grunt" : "^1.0.1",
+    "grunt-cli" : "^1.2.0",
+    "grunt-npmcopy" : "^0.1.0",
+    "grunt-contrib-clean" : "^1.0.0"
   },
   "bugs" : {
     "url" : "https://github.com/covex-nn/joos-behavior/issues"
   },
   "homepage" : "https://github.com/covex-nn/joos-behavior",
   "scripts" : {
-    "test" : "echo \"Error: no test specified\" && exit 1"
+    "test" : "echo \"Error: no test specified\" && exit 1",
+    "prepublish" : "node_modules/.bin/grunt"
   }
 }
