@@ -1,9 +1,9 @@
 {
   "name": "nativescript-behavior",
-  "description": "NativeScript Behavior",
+  "description": "Behavioral components for NativeScript Views",
   "license": "MIT",
   "main": "lib/main.js",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "author": {
     "name": "Andrey F. Mindubaev",
     "email": "andrey@mindubaev.ru"
@@ -13,7 +13,7 @@
     "components"
   ],
   "files": [
-    "lib"
+    "lib", "README.md"
   ],
   "repository": {
     "type": "git",
