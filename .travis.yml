@@ -1,12 +1,14 @@
 language: android
 
+jdk: oraclejdk8
+
 android:
   components:
     - platform-tools
     - build-tools-23.0.1
     - android-23
     - extra-android-m2repository
-    - sys-img-armeabi-v7a-android-23
+    - sys-img-armeabi-v7a-android-19
 
 before_cache:
     - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
@@ -16,6 +18,7 @@ cache:
         - .nvm
         - $HOME/.gradle/caches/
         - $HOME/.gradle/wrapper/
+        - node_modules
 
 install:
     - nvm install 4
@@ -23,12 +26,12 @@ install:
     - npm install
 
 before_script:
-    - echo no | android create avd --force -n test -t android-23 -b armeabi-v7a
+    - echo no | android create avd --force -n test -t android-19 -b armeabi-v7a
     - emulator -avd test -no-audio -no-window &
     - android-wait-for-emulator
-
+    - adb shell input keyevent 82 &
+    
 script:
     - tns usage-reporting disable
-    #- tns error-reporting disable
     - tns platform add android
     - tns test android --emulator --justlaunch
