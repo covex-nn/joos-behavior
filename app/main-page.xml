@@ -1,5 +1,5 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" class="main-page" loaded="onLoaded">
-    <GridLayout columns="auto, auto, auto, auto" rows="auto, auto, auto" width="100%" id="container">
+    <GridLayout columns="auto, auto, auto, auto" rows="auto, auto, auto" width="100%">
         <StackLayout col="0" row="0">
             <Button text="+class 'b1'" class="show-debug" ontap="{{ attachB1_className }}" />
             <Button text="+class 'b2'" class="show-debug" ontap="{{ attachB2_className }}" />
@@ -27,7 +27,7 @@
             <Label col="1" row="2" text="{{ info1 }}" class="debug-cell cell-data" />
         </GridLayout>
 
-        <StackLayout col="0" row="1" colSpan="4" class="tap-container">
+        <StackLayout col="0" row="1" colSpan="4" class="tap-container" id="container">
             <Button class="tap-me me-b1" text="Tap me!" id="component" />
         </StackLayout>
     </GridLayout>
