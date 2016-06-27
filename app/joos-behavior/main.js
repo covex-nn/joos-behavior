@@ -76,16 +76,16 @@ var Behavior = JooS.Reflect(
         /**
          * Get parent Behavior
          *
+         * @param {String} parentType Parent type
+         *
          * @return {Behavior|null}
          * @private
          */
-        getParent: function() {
+        getParent: function(parentType) {
             /** @type {View} */
             var parent = this.nsObject.parent;
             /** @type {Behavior} */
             var parentBehavior;
-            /** @type {Function} */
-            var parentType = this.getParentType();
 
             var counter = 128;
             while (parent && counter) {
@@ -98,6 +98,14 @@ var Behavior = JooS.Reflect(
             }
 
             return null;
+        },
+        /**
+         * Get page parent
+         *
+         * @return {Behavior|null}
+         */
+        getPageParent: function() {
+            return this.getParent("Page");
         },
         /**
          * onLoadedChild event handler
@@ -118,7 +126,7 @@ var Behavior = JooS.Reflect(
         onRegistered: function() {
             this.isRegistered = true;
 
-            this.parent = this.getParent();
+            this.parent = this.getParent(this.getParentType());
 
             if (this.parent) {
                 var eventData = this.createLoadedChildEvent().getEventData();
