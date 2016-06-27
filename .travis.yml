@@ -34,4 +34,5 @@ before_script:
 script:
     - tns usage-reporting disable
     - tns platform add android
+    - tns build android
     - tns test android --emulator --justlaunch
