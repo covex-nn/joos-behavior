@@ -1,0 +1,26 @@
+.tap-container {
+    joos-behavior: "~/components/debug/layout";
+}
+.me-b1 {
+    joos-behavior: "~/components/debug/b1";
+}
+.me-b2 {
+    joos-behavior: "~/components/debug/b2";
+}
+
+
+.tap-me {
+    font-size: 30;
+    horizontal-align: center;
+    margin: 20;
+}
+Button.show-debug {
+    font-size: 10;
+    height: 35;
+}
+
+.debug-table { padding: 10; }
+.debug-table .debug-cell { margin: 5px; }
+.debug-table .cell-header { font-size: 24; }
+.debug-table .cell-title { font-size: 16; font-weight: bold; }
+.debug-table .cell-data { font-size: 16; }

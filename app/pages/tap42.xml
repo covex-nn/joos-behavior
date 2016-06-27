@@ -1,0 +1,11 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd">
+    <GridLayout columns="*" rows="*, auto">
+        <StackLayout row="0" col="0" class="tap42-container">
+            <Label text="Tap the button" class="title" />
+            <Button text="TAP" class="tap42-button" />
+            <Label class="message tap42-message" textWrap="true" />
+        </StackLayout>
+
+        <Button row="1" col="0" text="DEBUG" class="nb-hyperlink" data-href="pages/debug" />
+    </GridLayout>
+</Page>

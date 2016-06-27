@@ -90,7 +90,7 @@ var ConcreteBehavior = (function (_super) {
 exports.Behavior = ConcreteBehavior;
 ```
 
-Put this code in **~/shared/concreteBehavior.js** for example
+Put this code in **~/components/concreteBehavior.js** for example
 
 ## Create new CSS class for a view-with-behavior
 
@@ -102,13 +102,13 @@ Page {
 }
 
 .concrete-behavior {
-  joos-behavior: "~/shared/concreteBehavior";
+  joos-behavior: "~/components/concreteBehavior";
 }
 ```
 
 Put this code in your [/app/app.css](https://github.com/covex-nn/joos-behavior/blob/master/app/app.css) file
 
-Also, you can set behavior via ``viewButton.style.joosBehavior = "~/shared/concreteBehavior.js"``
+Also, you can set behavior via ``viewButton.style.joosBehavior = "~/components/concreteBehavior.js"``
 
 ## Assign class to a view
 
@@ -124,7 +124,7 @@ Behavior will be attached immediately after setting ``joosBehavior`` style prope
 
 Also, behavior will be detached after ``Layout.removeChild(contextView);`` and attached back after ``Layout.addChild(contextView);``
 
-## Tap the buttom
+## Tap the button
 
 That's it =)
 
@@ -134,10 +134,6 @@ Behaviors have parents and can interact with its siblings with `this.parent.noti
 
 ## Demo
 
-This repository is a source for npm package [nativescript-behavior](https://www.npmjs.com/package/nativescript-behavior) and a demo application, showing how it works.
-
-See:
-
-* Module initialization is in [app/app.js](https://github.com/covex-nn/joos-behavior/blob/master/app/app.js)
-* Components ["~/shared/b1"](https://github.com/covex-nn/joos-behavior/blob/master/app/shared/b1.js), ["~/shared/b2"](https://github.com/covex-nn/joos-behavior/blob/master/app/shared/b2.js), ["~/shared/layout"](https://github.com/covex-nn/joos-behavior/blob/master/app/shared/layout.js) and ["nativescript-behavior/lib/page"](https://github.com/covex-nn/joos-behavior/blob/master/app/joos-behavior/page.js)
-* CSS is in [app/app.css](https://github.com/covex-nn/joos-behavior/blob/master/app/app.css)
+This repository is a source for npm package [nativescript-behavior](https://www.npmjs.com/package/nativescript-behavior) and a demo NatiteScript application.
+ 
+Demo App shows how to unlock the NativeScript clicker achievement with Behavior components and without Model-View-ViewModel.

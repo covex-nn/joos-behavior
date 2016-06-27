@@ -18,7 +18,7 @@ var b0 = JooS.Reflect(
         __constructor: function(view) {
             this.__constructor.__parent(view);
 
-            this.name = "~/shared/b0";
+            this.name = "~/components/debug/b0";
 
             //this.nsObject.addEventListener("tap", this.onTap, this);
         },

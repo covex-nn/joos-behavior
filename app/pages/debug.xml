@@ -29,6 +29,7 @@
 
         <StackLayout col="0" row="1" colSpan="4" class="tap-container" id="container">
             <Button class="tap-me me-b1" text="Tap me!" id="component" />
+            <Button row="1" col="0" text="BACK" class="tap-me nb-hyperlink" data-href="pages/tap42" />
         </StackLayout>
     </GridLayout>
 </Page>

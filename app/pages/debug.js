@@ -50,12 +50,12 @@ function onLoaded(args) {
     };
 
     bindingContext.attachB1_style = function() {
-        label.style.joosBehavior = "~/shared/b1";
+        label.style.joosBehavior = "~/components/debug/b1";
         collectInfo();
     };
 
     bindingContext.attachB2_style = function() {
-        label.style.joosBehavior = "~/shared/b2";
+        label.style.joosBehavior = "~/components/debug/b2";
         collectInfo();
     };
 

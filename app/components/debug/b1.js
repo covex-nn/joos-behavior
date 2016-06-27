@@ -1,17 +1,17 @@
 var JooS = require("joos-inheritance");
-var b0 = require("~/shared/b0").Behavior;
+var b0 = require("./b0").Behavior;
 
 /**
- * @class b2
+ * @class b1
  * @extends b0
  */
-var b2 = JooS.Reflect(
+var b1 = JooS.Reflect(
     b0,
-    /** @lends b2.prototype */
+    /** @lends b1.prototype */
     {
         __constructor: function(view) {
             this.__constructor.__parent(view);
-            this.name = "~/shared/b2";
+            this.name = "~/components/debug/b1";
 
             this.nsObject.addEventListener("tap", this.onTap, this);
         },
@@ -23,4 +23,4 @@ var b2 = JooS.Reflect(
     }
 );
 
-exports.Behavior = b2;
+exports.Behavior = b1;

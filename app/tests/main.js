@@ -1,5 +1,5 @@
-var labelBehavior = require("~/shared/b0").Behavior;
-var layoutBehavior = require("~/shared/layout").Behavior;
+var labelBehavior = require("~/components/debug/b0").Behavior;
+var layoutBehavior = require("~/components/debug/layout").Behavior;
 var pageBehavior = require("~/joos-behavior/page").Behavior;
 
 var Page = require("ui/page").Page;
@@ -12,13 +12,13 @@ QUnit.test("Main bevavior module test", function(assert) {
     assert.equal(newPage.style.joosBehavior, "~/joos-behavior/page");
 
     var newLayout = new AbsoluteLayout();
-    newLayout.style.joosBehavior = "~/shared/layout";
-    assert.equal(newLayout.style.joosBehavior, "~/shared/layout");
+    newLayout.style.joosBehavior = "~/components/debug/layout";
+    assert.equal(newLayout.style.joosBehavior, "~/components/debug/layout");
 
     var newLabel = new Label();
 
-    newLabel.style.joosBehavior = "~/shared/b0";
-    assert.equal(newLabel.style.joosBehavior, "~/shared/b0");
+    newLabel.style.joosBehavior = "~/components/debug/b0";
+    assert.equal(newLabel.style.joosBehavior, "~/components/debug/b0");
 
     newLayout.addChild(newLabel);
     newPage.content = newLayout;
