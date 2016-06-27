@@ -27,8 +27,8 @@ var b0 = JooS.Reflect(
             
             this.__destructor.__parent();
         },
-        getParentClass: function() {
-            return Layout;
+        getParentType: function() {
+            return "TestLayout";
         }
     }
 );

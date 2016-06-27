@@ -23,8 +23,8 @@ var Layout = JooS.Reflect(
 
             // console.log("Layout children after UnloadedChild: " + this.children.length);
         },
-        getParentClass: function() {
-            return Page;
+        getType: function() {
+            return "TestLayout";
         }
     }
 );

@@ -58,12 +58,20 @@ var Behavior = JooS.Reflect(
             this.nsObject = null;
         },
         /**
-         * Get parent class
+         * Get parent type name
          *
-         * @returns {Function}
+         * @returns {String}
          */
-        getParentClass: function() {
-            return Behavior;
+        getParentType: function() {
+            return "Page";
+        },
+        /**
+         * Get self type name
+         *
+         * @returns {String}
+         */
+        getType: function() {
+            return "Behavior";
         },
         /**
          * Get parent Behavior
@@ -77,12 +85,12 @@ var Behavior = JooS.Reflect(
             /** @type {Behavior} */
             var parentBehavior;
             /** @type {Function} */
-            var parentClass = this.getParentClass();
+            var parentType = this.getParentType();
 
             var counter = 128;
             while (parent && counter) {
                 parentBehavior = parent.getBehavior();
-                if (parentBehavior && parentBehavior instanceof parentClass) {
+                if (parentBehavior && parentBehavior.getType() == parentType) {
                     return parentBehavior;
                 }
                 parent = parent.parent;
@@ -100,9 +108,7 @@ var Behavior = JooS.Reflect(
          * @private
          */
         onLoadedChild: function(eventData) {
-            if (eventData.object instanceof Behavior) {
-                this.children.push(eventData.object);
-            }
+            this.children.push(eventData.object);
         },
         /**
          * PageBehavior calls this method after initialization
@@ -128,11 +134,9 @@ var Behavior = JooS.Reflect(
          * @private
          */
         onUnloadedChild: function(eventData) {
-            if (eventData.object instanceof Behavior) {
-                var index = this.children.indexOf(eventData.object);
-                if (index >= 0) {
-                    this.children.splice(index, 1);
-                }
+            var index = this.children.indexOf(eventData.object);
+            if (index >= 0) {
+                this.children.splice(index, 1);
             }
         },
         /**
@@ -334,7 +338,7 @@ style.joosBehaviorProperty = new styleProperty.Property(
                 } else {
                     value = Behavior.convertCssValue(value);
                     var module = require(value);
-                    result = !!module["Behavior"] && module.Behavior.prototype instanceof Behavior;
+                    result = !!module["Behavior"];
                 }
             } catch (e) {
                 result = false;
@@ -471,6 +475,14 @@ var PageBehavior = JooS.Reflect(
     {
         __constructor: function(nsObject) {
             this.__constructor.__parent(nsObject);
+        },
+        /**
+         * Get self type name
+         *
+         * @returns {String}
+         */
+        getType: function() {
+            return "Page";
         }
     }
 );
