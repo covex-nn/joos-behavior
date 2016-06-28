@@ -11,6 +11,12 @@ Package implements [Strategy pattern](https://en.wikipedia.org/wiki/Strategy_pat
 
 The main goal of a project is to separate development process by two stages: desing and coding.
 
+## Demo
+
+This repository is a source for npm package [nativescript-behavior](https://www.npmjs.com/package/nativescript-behavior) and a demo NatiteScript application.
+ 
+Demo App shows how to unlock the NativeScript clicker achievement with Behavior components and without Model-View-ViewModel.
+
 ## Installation 
 
 ```bash
@@ -130,10 +136,5 @@ That's it =)
 
 ## Features
 
-Behaviors have parents and can interact with its siblings with `this.parent.notify(eventData)` method.
-
-## Demo
-
-This repository is a source for npm package [nativescript-behavior](https://www.npmjs.com/package/nativescript-behavior) and a demo NatiteScript application.
- 
-Demo App shows how to unlock the NativeScript clicker achievement with Behavior components and without Model-View-ViewModel.
+* Behaviors have parents and can interact with its siblings with `this.parent.notify(eventData)` method.
+* Behaviors can add/remove/toggle className of it's nsObject and set/remove attributes value

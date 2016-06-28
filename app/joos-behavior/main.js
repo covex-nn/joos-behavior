@@ -17,6 +17,9 @@ var Observable = observable.Observable;
 var behaviorCounter = 0;
 var behaviorList = { };
 
+var rclass = /[\t\r\n\f]/g;
+var rnotwhite = /\S+/g;
+
 /**
  * @class Behavior
  * @extends Observable
@@ -58,9 +61,144 @@ var Behavior = JooS.Reflect(
             this.nsObject = null;
         },
         /**
+         * Add value to nsObject.className
+         *
+         * @param {String} value CSS class
+         *
+         * @return {Behavior}
+         * @link https://github.com/jquery/jquery/blob/master/src/attributes/classes.js
+         */
+        addClass: function(value) {
+            var classes, cur, curValue, clazz, j, finalValue;
+
+            if (value && this.nsObject) {
+                classes = value.match(rnotwhite) || [];
+
+                curValue = this.nsObject.className;
+                cur = (" " + curValue + " ").replace(rclass, " ");
+                if (cur) {
+                    j = 0;
+                    while ((clazz = classes[j++])) {
+                        if (cur.indexOf(" " + clazz + " ") < 0) {
+                            cur += clazz + " ";
+                        }
+                    }
+                    finalValue = cur.trim();
+                    if (curValue !== finalValue) {
+                        this.nsObject.className = finalValue;
+                    }
+                }
+            }
+
+            return this;
+        },
+        /**
+         * Remove value from nsObject.className
+         *
+         * @param {String} value CSS class
+         *
+         * @return {Behavior}
+         * @link https://github.com/jquery/jquery/blob/master/src/attributes/classes.js
+         */
+        removeClass: function(value) {
+            var classes, cur, curValue, clazz, j, finalValue;
+
+            if (this.nsObject) {
+                if (!arguments.length) {
+                    this.nsObject.className = "";
+                } else if (typeof value === "string" && value) {
+                    classes = value.match(rnotwhite) || [];
+
+                    curValue = this.nsObject.className;
+                    cur = (" " + curValue + " ").replace(rclass, " ");
+                    if (cur) {
+                        j = 0;
+                        while ((clazz = classes[j++])) {
+                            while (cur.indexOf(" " + clazz + " ") > -1) {
+                                cur = cur.replace(" " + clazz + " ", " ");
+                            }
+                        }
+
+                        finalValue = cur.trim();
+                        if (curValue !== finalValue) {
+                            this.nsObject.className = finalValue;
+                        }
+                    }
+                }
+            }
+
+            return this;
+        },
+        /**
+         * Toggle value in nsObject.className
+         *
+         * @param {String} value CSS class
+         *
+         * @return {Behavior}
+         */
+        toggleClass: function(value) {
+            return this.hasClass(value) ? this.removeClass(value) : this.addClass(value);
+        },
+        /**
+         * Has value in nsObject.className
+         *
+         * @param {String} value CSS class
+         *
+         * @return {Boolean}
+         * @link https://github.com/jquery/jquery/blob/master/src/attributes/classes.js
+         */
+        hasClass: function(value) {
+            var className, cur, has = false;
+
+            if (this.nsObject) {
+                className = " " + value + " ";
+                cur = (" " + this.nsObject.className + " ").replace(rclass, " ");
+
+                if (cur.indexOf(className) > -1) {
+                    has = true;
+                }
+            }
+
+            return has;
+        },
+        /**
+         * Get/set attribute value to nsObject
+         *
+         * @param {String}           name    Attribute name
+         * @param {*|null|undefined} [value] Value
+         *
+         * @return {*|null}
+         */
+        attr: function(name, value) {
+            if (this.nsObject) {
+                if (value !== undefined) {
+                    if (value === null) {
+                        this.removeAttr(name);
+                    } else {
+                        this.nsObject[name] = value;
+                    }
+                } else {
+                    return this.nsObject[name];
+                }
+            }
+        },
+        /**
+         * Remove attribute value from nsObject
+         *
+         * @param {String} name Attribute name
+         *
+         * @return {null}
+         */
+        removeAttr: function(name) {
+            if (this.nsObject) {
+                this.nsObject[name] = undefined;
+            }
+        },
+        /**
          * Get parent type name
          *
-         * @returns {String}
+         * @return {String}
+         * @protected
          */
         getParentType: function() {
             return "Page";
@@ -68,7 +206,8 @@ var Behavior = JooS.Reflect(
         /**
          * Get self type name
          *
-         * @returns {String}
+         * @return {String}
+         * @protected
          */
         getType: function() {
             return "Behavior";
@@ -79,7 +218,7 @@ var Behavior = JooS.Reflect(
          * @param {String} parentType Parent type
          *
          * @return {Behavior|null}
-         * @private
+         * @protected
          */
         getParent: function(parentType) {
             /** @type {View} */
@@ -103,6 +242,7 @@ var Behavior = JooS.Reflect(
          * Get page parent
          *
          * @return {Behavior|null}
+         * @protected
          */
         getPageParent: function() {
             return this.getParent("Page");
@@ -112,8 +252,8 @@ var Behavior = JooS.Reflect(
          *
          * @param {Object} eventData Event data
          *
-         * @returns {boolean}
-         * @private
+         * @return {boolean}
+         * @protected
          */
         onLoadedChild: function(eventData) {
             this.children.push(eventData.object);
@@ -122,6 +262,7 @@ var Behavior = JooS.Reflect(
          * PageBehavior calls this method after initialization
          *
          * @return null
+         * @protected
          */
         onRegistered: function() {
             this.isRegistered = true;
@@ -138,8 +279,8 @@ var Behavior = JooS.Reflect(
          *
          * @param {Object} eventData Event data
          *
-         * @returns {boolean}
-         * @private
+         * @return {boolean}
+         * @protected
          */
         onUnloadedChild: function(eventData) {
             var index = this.children.indexOf(eventData.object);
@@ -150,7 +291,7 @@ var Behavior = JooS.Reflect(
         /**
          * Create loadedChild event
          *
-         * @returns {BehaviorEvent}
+         * @return {BehaviorEvent}
          * @private
          */
         createLoadedChildEvent: function() {
@@ -164,7 +305,7 @@ var Behavior = JooS.Reflect(
         /**
          * Create unloadedChild event
          *
-         * @returns {BehaviorEvent}
+         * @return {BehaviorEvent}
          * @private
          */
         createUnloadedChildEvent: function() {
@@ -186,7 +327,7 @@ Behavior.unloadedChildEvent = "unloadedChild";
  *
  * @param {String} value Module name
  *
- * @returns {String}
+ * @return {String}
  */
 Behavior.convertCssValue = function(value) {
     return value
@@ -500,7 +641,7 @@ var PageBehavior = JooS.Reflect(
         /**
          * Get self type name
          *
-         * @returns {String}
+         * @return {String}
          */
         getType: function() {
             return "Page";
