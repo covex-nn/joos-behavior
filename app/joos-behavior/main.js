@@ -426,6 +426,19 @@ Object.defineProperty(
     configurable: true
 });
 
+Object.defineProperty(
+    View.prototype,
+    "joosBehavior", {
+    get: function () {
+        return this.style.joosBehavior;
+    },
+    set: function (value) {
+        this.style.joosBehavior = value;
+    },
+    enumerable: true,
+    configurable: true
+});
+
 /**
  * Get view's behavior if attached
  * 

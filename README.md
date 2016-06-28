@@ -108,7 +108,7 @@ Page {
 
 Put this code in your [/app/app.css](https://github.com/covex-nn/joos-behavior/blob/master/app/app.css) file
 
-Also, you can set behavior via ``viewButton.style.joosBehavior = "~/components/concreteBehavior.js"``
+Also, you can assign behavior via ``concreteView.style.joosBehavior = "~/components/concreteBehavior.js"`` or ``concreteView.joosBehavior = "~/components/concreteBehavior.js"``
 
 ## Assign class to a view
 

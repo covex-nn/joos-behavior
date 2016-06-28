@@ -17,7 +17,8 @@ QUnit.test("Main bevavior module test", function(assert) {
 
     var newLabel = new Label();
 
-    newLabel.style.joosBehavior = "~/components/debug/b0";
+    newLabel.joosBehavior = "~/components/debug/b0";
+    assert.equal(newLabel.joosBehavior, "~/components/debug/b0");
     assert.equal(newLabel.style.joosBehavior, "~/components/debug/b0");
 
     newLayout.addChild(newLabel);
